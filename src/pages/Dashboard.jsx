@@ -50,18 +50,13 @@ function Dashboard() {
   };
 
   useEffect(() => {
-      const token = localStorage.getItem('access');
-      if (!token) {
-          navigate('/login');
-          return;
-      }
+    fetchGoals();
+    fetchCategories();
+    const interval = setInterval(() => {
       fetchGoals();
-      fetchCategories();
-      const interval = setInterval(() => {
-          fetchGoals();
-      }, 30000);
-        return() => clearInterval(interval);
-  }, []);
+    }, 30000);
+    return () => clearInterval(interval);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleAddGoal = async (e) => {
     e.preventDefault();
