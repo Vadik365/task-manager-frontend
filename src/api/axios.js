@@ -29,7 +29,7 @@ api.interceptors.response.use(
       }
 
       try {
-        const res = await axios.post('http://localhost:8000/api/token/refresh/', {
+        const res = await axios.post('https://task-manager-api-production-c7f3.up.railway.app/api/token/refresh/', {
           refresh,
         });
         const newAccess = res.data.access;
