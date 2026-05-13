@@ -11,7 +11,7 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/register/', {
+      await axios.post('https://task-manager-api-production-c7f3.up.railway.app/api/register/', {
         username,
         password,
       });
