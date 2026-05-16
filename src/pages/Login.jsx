@@ -6,10 +6,12 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await axios.post('https://task-manager-api-production-c7f3.up.railway.app/api/token/', {
         username,
@@ -20,6 +22,8 @@ function Login() {
       navigate('/');
     } catch (err) {
       setError('Invalid username or password');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -42,8 +46,8 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="btn-primary" type="submit" style={{ width: '100%', padding: '10px' }}>
-            Sign in
+          <button className="btn-primary" type="submit" style={{ width: '100%', padding: '10px' }} disabled={loading}>
+            {loading ? 'Loading...' : 'Sign in'}
           </button>
         </form>
         <p className="auth-link">
